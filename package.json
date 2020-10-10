@@ -1,0 +1,41 @@
+{
+  "name": "assignmentfornova",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "didemtumer",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "connect-flash": "^0.1.1",
+    "convert-excel-to-json": "^1.7.0",
+    "cors": "^2.8.5",
+    "ejs": "^3.1.5",
+    "express": "^4.17.1",
+    "express-fileupload": "^1.2.0",
+    "express-session": "^1.17.1",
+    "fast-csv": "^4.3.2",
+    "fs": "0.0.1-security",
+    "fs-extra": "^9.0.1",
+    "gridfs-stream": "^1.1.1",
+    "js-alert": "^1.0.4",
+    "json2csv": "^5.0.3",
+    "method-override": "^3.0.0",
+    "mongo-xlsx": "^1.0.12",
+    "mongoose": "^5.10.7",
+    "multer": "^1.4.2",
+    "multer-gridfs-storage": "^4.2.0",
+    "node-xlsx": "^0.15.0",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0",
+    "passport-local-mongoose": "^6.0.1",
+    "path": "^0.12.7",
+    "progress-stream": "^2.0.0",
+    "request": "^2.88.2",
+    "save": "^2.4.0",
+    "xlsx-to-json": "^0.3.0"
+  }
+}

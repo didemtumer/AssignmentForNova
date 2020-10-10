@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Nova DSA Assignment</title>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+		<link rel="stylesheet" type="text/css"   href="/css/style.css">
+		<script src="https://kit.fontawesome.com/1b1876594c.js" crossorigin="anonymous"></script>
+	</head>
+
+	<body>
+		<div class="d-flex" id="wrapper">
+		<!-- Sidebar -->
+    		<div class="bg-light border-right" id="sidebar-wrapper">
+      			<div class="sidebar-heading">NOVA DSA </div>
+      			<div class="list-group list-group-flush">
+        			<a href="/dashboard" class="list-group-item list-group-item-action bg-light">Dashboard</a>
+        			<a href="/project" class="list-group-item list-group-item-action bg-light">Projects</a>
+				</div>
+    		</div>
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    		<div id="page-content-wrapper">
+				<nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+      				<form class="form-inline">
+    					<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+    					<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+  					</form>
+					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          			<span class="navbar-toggler-icon"></span>
+        			</button>
+
+        			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+          				<ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+            				<li class="nav-item active">
+              					<a class="nav-link" href="/logout">Logout</a>
+            				</li>
+          				</ul>
+          
+        			</div>
+      			</nav>
+
+      			<div class="container-fluid">
+        			<h1 class="mt-4">Simple Sidebar</h1>
+        			<p>The starting state of the menu will appear collapsed on smaller screens, and will appear non-collapsed on larger screens. When toggled using the button below, the menu will change.</p>
+        			<p>Make sure to keep all page content within the <code>#page-content-wrapper</code>. The top navbar is optional, and just for demonstration. Just create an element with the <code>#menu-toggle</code> ID which will toggle the menu when clicked.</p>
+      			</div>
+    		</div>
+		</div>
+  	</body>
+</html>
