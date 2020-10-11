@@ -15,7 +15,7 @@ const path                = require('path');
 var xlsxtojson            = require("xlsx-to-json");
 const fs = require('fs');
 var csv                   = require("fast-csv");
-var projectId , filename , dataInMongoose ;
+var projectId , filename , dataInMongoose,  projects ;
 
 app.set("view engine", "ejs");
 const port = process.env.PORT || 3000;
@@ -48,6 +48,8 @@ const upload = multer({ storage: storage });
 // utiliza a storage para configurar a instância do multer
 app.use(express.static('public'));
 
+
+
 // continua do mesma forma 
 app.post('/project', upload.single('file'), 
     (req, res ,next ) => {
@@ -55,7 +57,7 @@ app.post('/project', upload.single('file'),
     	if (!file){
     		const error = new error("lütfen bir dosya yükleyin")
     		error.httpStatusCode = 400
-    		return next(error)
+    		return next(error);
     	}
     	console.log("dosya yüklendi")
     	res.status(204).send(file)
@@ -63,12 +65,27 @@ app.post('/project', upload.single('file'),
     	console.log(file.path)
     	projectId=req.file.filename +"/"+ Date.now()
 
-    	fileName =file.filename
-    	console.log(projectId)
+    	fileName =file.filename;
+    	console.log(projectId);
 		callConverter();
+		res.redirect("/project")
 		Project.find(dataInMongoose).remove().exec();
 		
-    })  ;
+    });
+
+	//app.get("/project", async (req, res) => {
+	//		    const projects = await Project.find({});
+	//		    res.render("project", {projects});
+	//		});
+	app.get("/project", function(req, res){
+    Project.find({},function(err, projects){
+        if(err){
+            throw err;
+        } else {
+            res.render("project",{projects:projects});
+        }
+    });
+});		
 
 
 
@@ -93,9 +110,6 @@ app.get("/", function(req, res){
 
 app.get("/dashboard", function(req, res){
 	res.render("dashboard");
-});
-app.get("/project", function(req, res){
-	res.render("project");
 });
 
 //===============
@@ -138,6 +152,9 @@ app.get("/logout", function(req,res){
 	req.logout();
 	res.redirect("/");
 });
+
+
+
 //Converter Function
 
 function callConverter() {
@@ -149,11 +166,21 @@ function callConverter() {
 			console.log(err);
 		} else {
 			console.log(result);
-			dataInMongoose=result
-			Project.insertMany(result)  
-	}
-	});
+			dataInMongoose=result;
+			Project.insertMany(result);
+
+		}
+   })
+		app.get("/project", function(req, res){
+    	Project.find({},function(err, projects){
+        if(err){
+            throw err;
+        } else {
+            res.render("project",{projects:projects});
+        }
+    });
+});	
+};
 
 
-}
 app.listen(port, () => console.log(`Listening on ${port}`));

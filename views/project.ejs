@@ -43,14 +43,41 @@
       			<div class="container-fluid">
         			<div class="container">
 			            <div class="row">
-                 <h3>File Upload:</h3>
-               <form action='project' method='post' encType="multipart/form-data">
-               <input type="file" name="file" />
-               <input type='submit' value='Upload!' />
-              </form> 
-           
-        			</div>
-      			</div>
+                    <h3>File Upload:</h3>
+                    <form action='project' method='post' encType="multipart/form-data">
+                      <input type="file" name="file" />
+                      <input type='submit' value='Upload!' />
+                    </form> 
+                  </div>
+      			 </div>
+             <br>
+             <div class="container">
+                <div class="container">
+    <div class="row">
+        <h1 class="lead">Project Data</h1>
+        <div id="table" class="table-responsive table-editable">
+            <table  class="table table-striped table-hover table-bordered">
+                <thead>
+        <tr>
+            <th>Title</th>
+            <th>Body</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% projects.forEach(project => { %>
+            <tr>
+                <td><%= project.rate %></td>
+                <td><%= project.ID %></td>
+            </tr>
+        <% }) %>
+    </tbody>
+                
+            </table>
+        </div>
+    </div>
+</div>
+
+             <div>
     		</div>
 		</div>
 
