@@ -12,14 +12,20 @@ var methodOverride        = require("method-override");
 const multer              = require("multer");
 const mongoose            = require('mongoose');
 const path                = require('path');
+const livereload          = require("livereload");
 var xlsxtojson            = require("xlsx-to-json");
-const fs = require('fs');
+const fs                  = require('fs');
 var csv                   = require("fast-csv");
 var projectId , filename , dataInMongoose,  projects ;
+const liveReloadServer  = livereload.createServer();
+const connectLivereload = require("connect-livereload");
 
+
+liveReloadServer.watch(path.join(__dirname, 'public'));
 app.set("view engine", "ejs");
 const port = process.env.PORT || 3000;
 
+app.use(connectLivereload());
 app.use( express.static( "public" ) );
 app.use(bodyParser.urlencoded({extendeed: true}));
 app.use(bodyParser.json());
@@ -45,12 +51,9 @@ const storage = multer.diskStorage({
 
 
 const upload = multer({ storage: storage });
-// utiliza a storage para configurar a instância do multer
 app.use(express.static('public'));
 
 
-
-// continua do mesma forma 
 app.post('/project', upload.single('file'), 
     (req, res ,next ) => {
     	file = req.file
@@ -58,38 +61,45 @@ app.post('/project', upload.single('file'),
     		const error = new error("lütfen bir dosya yükleyin")
     		error.httpStatusCode = 400
     		return next(error);
-    	}
+    	}else{
+    	res.setHeader('Content-Type', 'multipart/form-data');
+    	res.setHeader('Connection' , 'keep-alive');
     	console.log("dosya yüklendi")
-    	res.status(204).send(file)
+    	res.status(204).send(file);
+    	//res.render("project");
     	console.log(file.filename)
     	console.log(file.path)
     	projectId=req.file.filename +"/"+ Date.now()
-
     	fileName =file.filename;
     	console.log(projectId);
 		callConverter();
 		res.redirect("/project")
-		Project.find(dataInMongoose).remove().exec();
-		
+		//Proj,ect.find(dataInMongoose).remove().exec();
+    	}
     });
 
-	//app.get("/project", async (req, res) => {
-	//		    const projects = await Project.find({});
-	//		    res.render("project", {projects});
-	//		});
-	app.get("/project", function(req, res){
+app.get("/project", function(req, res , next){
     Project.find({},function(err, projects){
         if(err){
             throw err;
         } else {
             res.render("project",{projects:projects});
         }
-    });
-});		
+    })
+});	
+liveReloadServer.server.once("connection", () => {
+  setTimeout(() => {
+    liveReloadServer.refresh("/");
+  }, 5);
+});
+	
+function sampleFunction() {
+  location.reload();
+  console.log("çağrıldım")
+}
 
 
-
-	//PASSPORT CONFİG
+//PASSPORT CONFIG
 app.use(require("express-session")({
 	secret: "lololo",
 	resave: false,
@@ -168,18 +178,8 @@ function callConverter() {
 			console.log(result);
 			dataInMongoose=result;
 			Project.insertMany(result);
-
 		}
    })
-		app.get("/project", function(req, res){
-    	Project.find({},function(err, projects){
-        if(err){
-            throw err;
-        } else {
-            res.render("project",{projects:projects});
-        }
-    });
-});	
 };
 
 

@@ -33,6 +33,13 @@
 #wrapper.toggled #sidebar-wrapper {
   margin-left: 0;
 }
+#formOne{
+
+}
+.carousel-inner{
+height:500px
+}
+
 
 @media (min-width: 768px) {
   #sidebar-wrapper {
