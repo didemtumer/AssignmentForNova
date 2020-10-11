@@ -1,5 +1,5 @@
 # AssignmentForNova
- Bu projede Nova DSA tarafından verilen görev projesidir.
+ Bu projede Nova DSA tarafından verilen görev projesi tamamlanmıştır.
  ## Proje Özellikleri
  - Proje anasayfa, dashboard sayfası ve project sayfası olmak üzere 3 sayfadan oluşmaktadır.
  - Kullanıcı anasayfadan kayıt olur ve dashboard sayfasına yönlendirilir.Kullanıcı Login için username ve şifre kullanır. Ardından dashboard sayfasına yönlendirilir.
