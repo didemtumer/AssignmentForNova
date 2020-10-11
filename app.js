@@ -92,12 +92,6 @@ liveReloadServer.server.once("connection", () => {
     liveReloadServer.refresh("/");
   }, 5);
 });
-	
-function sampleFunction() {
-  location.reload();
-  console.log("çağrıldım")
-}
-
 
 //PASSPORT CONFIG
 app.use(require("express-session")({
