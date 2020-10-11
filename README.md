@@ -1,5 +1,5 @@
 # AssignmentForNova
- Bu projede Nova DSA tarafından verilen task oluşturulmuş olup backend için Nodejs, veritabanı olarak MongoDB kullanılmıştır.
+ Bu projede Nova DSA tarafından verilen görev projesidir.
  ## Proje Özellikleri
  - Proje anasayfa, dashboard sayfası ve project sayfası olmak üzere 3 sayfadan oluşmaktadır.
  - Kullanıcı anasayfadan kayıt olur ve dashboard sayfasına yönlendirilir.Kullanıcı Login için username ve şifre kullanır. Ardından dashboard sayfasına yönlendirilir.
@@ -12,7 +12,7 @@
    * mongoose: Veritabanını projeye bağlamak için
    * xlsx-to-json: Excel dosyalarını json'a dönüştürmek için
    * passport, local-passport: Signup, login işlemleri için
-   * nodemon,livereload: Sayfayı otomatik olarak yüklemek ve yenilemek için kullanılmıştır
+   * nodemon,livereload: Sayfayı otomatik olarak yüklemek ve yenilemek için kullanıldı
 ## Proje Kurulumu
 - Nodejs ve MongoDB'yi indirin
 - -mongod komutu ile mongo servisini çalıştırın
