@@ -1,7 +1,7 @@
 {
   "name": "assignmentfornova",
   "version": "1.0.0",
-  "description": "",
+  "description": "Uploading Excel File Using Nodejs and MongoDB",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -42,5 +42,14 @@
     "request": "^2.88.2",
     "save": "^2.4.0",
     "xlsx-to-json": "^0.3.0"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/didemtumer/AssignmentForNova.git"
+  },
+  "bugs": {
+    "url": "https://github.com/didemtumer/AssignmentForNova/issues"
+  },
+  "homepage": "https://github.com/didemtumer/AssignmentForNova#readme"
 }

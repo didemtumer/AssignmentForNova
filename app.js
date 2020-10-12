@@ -20,7 +20,6 @@ var projectId , filename , dataInMongoose,  projects ;
 const liveReloadServer  = livereload.createServer();
 const connectLivereload = require("connect-livereload");
 
-
 liveReloadServer.watch(path.join(__dirname, 'public'));
 app.set("view engine", "ejs");
 const port = process.env.PORT || 3000;
@@ -66,15 +65,13 @@ app.post('/project', upload.single('file'),
     	res.setHeader('Connection' , 'keep-alive');
     	console.log("dosya yüklendi")
     	res.status(204).send(file);
-    	//res.render("project");
     	console.log(file.filename)
     	console.log(file.path)
     	projectId=req.file.filename +"/"+ Date.now()
     	fileName =file.filename;
     	console.log(projectId);
 		callConverter();
-		res.redirect("/project")
-		//Proj,ect.find(dataInMongoose).remove().exec();
+		Project.find(dataInMongoose).remove().exec();
     	}
     });
 
@@ -89,7 +86,7 @@ app.get("/project", function(req, res , next){
 });	
 liveReloadServer.server.once("connection", () => {
   setTimeout(() => {
-    liveReloadServer.refresh("/");
+    liveReloadServer.refresh("/project");
   }, 5);
 });
 
@@ -157,10 +154,7 @@ app.get("/logout", function(req,res){
 	res.redirect("/");
 });
 
-
-
-//Converter Function
-
+//Converter Function file to json
 function callConverter() {
 	xlsxtojson({
 		input: "./uploads/" + fileName,  // input xls 
