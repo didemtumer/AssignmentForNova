@@ -23,7 +23,6 @@ const connectLivereload = require("connect-livereload");
 liveReloadServer.watch(path.join(__dirname, 'public'));
 app.set("view engine", "ejs");
 const port = process.env.PORT || 3000;
-
 app.use(connectLivereload());
 app.use( express.static( "public" ) );
 app.use(bodyParser.urlencoded({extendeed: true}));
@@ -80,7 +79,7 @@ app.get("/project", function(req, res , next){
         if(err){
             throw err;
         } else {
-            res.render("project",{projects:projects});
+            res.render("project",{projects:projects, currentUser:req.user});
         }
     })
 });	
@@ -93,8 +92,8 @@ liveReloadServer.server.once("connection", () => {
 //PASSPORT CONFIG
 app.use(require("express-session")({
 	secret: "lololo",
-	resave: false,
-	saveUninitialized: false
+	resave: true,
+	saveUninitialized: true
 }));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -106,20 +105,20 @@ passport.deserializeUser(User.deserializeUser());
 //ROUTES
 //===========
 app.get("/", function(req, res){
-	res.render("home");
+	res.render("home",{currentUser:req.user});
 });
 
-app.get("/dashboard", function(req, res){
-	res.render("dashboard");
+app.get("/dashboard",isLoggedIn, function(req, res){
+	res.render("dashboard",{currentUser:req.user});
+});
+app.get("/project",isLoggedIn, function(req, res){
+	res.render("project",{currentUser:req.user});
 });
 
 //===============
 //AUTH ROUTES
 //===============
-//show the register form
-app.get("/", function(req, res){
-	res.render("home");
-});
+
 //handle signup logic
 app.post("/", function(req, res){
 	var newUser = new User({email: req.body.email, username: req.body.username});
@@ -136,14 +135,14 @@ app.post("/", function(req, res){
 
 //show login form
 app.get("/login", function(req, res){
-	res.render("login");
+	res.render("login",{currentUser:req.user});
 });
 
 //handle login logic
 app.post("/login", passport.authenticate("local", 
 	{
 		successRedirect: "/dashboard",
-		failureRedirect: "/login"
+		failureRedirect: "/login" ,
 	}), function(req, res){
 	res.send("login logic happenns here");
 });
@@ -169,6 +168,14 @@ function callConverter() {
 		}
    })
 };
+
+function isLoggedIn(req, res, next){
+	if(req.isAuthenticated()){
+		return next();
+	}
+	res.redirect("/login");
+};
+
 
 
 app.listen(port, () => console.log(`Listening on ${port}`));

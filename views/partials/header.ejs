@@ -19,12 +19,16 @@
                 </li>
             </ul>
             <ul class="navbar-nav">
+                <% if(!currentUser){ %>
                 <li class="nav-item">
                     <a class="nav-link" href="/login">Login</a>
                 </li>
+                <% } else{ %>
+                    <li "padding:10px; color:white;text-transform:capitalize;"> Sign In As <%= currentUser.username %> </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/logout">Logout</a>
                 </li>
+                <% }  %>
             </ul>
         </div>
     </nav>
