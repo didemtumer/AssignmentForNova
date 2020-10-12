@@ -17,4 +17,6 @@
 - Nodejs ve MongoDB'yi indirin
 - -mongod komutu ile mongo servisini çalıştırın
 - Bağımlıklıkları npm install komutu ile indirin
+- npm run watch komutuyla nodemon ve livereload başlatılması gerekmektedir! 
 - Proje localhost:3000 de çalışmaktadır.Bu linke tarayıcınızdan gidin.
+
