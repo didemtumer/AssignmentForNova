@@ -7,7 +7,7 @@
  - Project sayfasında lokalinizden excel dosyası yükleyebileceğiniz bir input alanı bulunur. Yükleme yapıldıktan sonra excel dosyasını tablo içinde görebileceğiniz bir alan mevcuttur.
  ## Projede Kullanılan Teknolojiler ve Araçlar
  - Projenin backend kısmı için Nodejs kullanıldı  . Expressjs FE framework'ü, veritabanı için MongoDB kullanıldı.
- - Kullanılan bazı bağımlılklar;
+ - Kullanılan bazı bağımlılıklar;
    * ejs: ejs dosya ismin, ejs uzantısız yazmak için
    * mongoose: Veritabanını projeye bağlamak için
    * xlsx-to-json: Excel dosyalarını json'a dönüştürmek için
