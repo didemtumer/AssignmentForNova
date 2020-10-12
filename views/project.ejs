@@ -30,16 +30,10 @@
         	</button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
           	<ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-              <% if(!currentUser){ %>
                 <li class="nav-item">
-                    <a class="nav-link" href="/login">Login</a>
-                </li>
-                <% }else{ %>
-                    <li "padding:10px; color:white;text-transform:capitalize;"> Sign In As <%=currentUser.username %> </li>
-                    <li class="nav-item">
                     <a class="nav-link" href="/logout">Logout</a>
                 </li>
-                <% } %>
+                
           	</ul>
           </div>
       	</nav>
@@ -50,8 +44,6 @@
                 <div class="form-group">
                   <label for="exampleFormControlFile1">Choose project file</label>
                   <input type="file" name="file" id="exampleFormControlFile1" />
-                </div>
-                <div class="form-group">
                   <input class="btn btn-primary" type='submit' value='Upload!' " />
                 </div>
               </form> 
