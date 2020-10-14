@@ -49,17 +49,22 @@ const storage = multer.diskStorage({
 });
 
 
-const upload = multer({ storage: storage });
-app.use(express.static('public'));
-
+//const upload = multer({ storage: storage });
+//app.use(express.static('public'));
+var upload = multer({ storage: storage , fileFilter: function (req, file, callback) {
+		var ext = path.extname(file.originalname);
+		if(ext !== '.xls' && ext !== '.xlsx') {
+			return callback("Error: File upload only supports the following filetypes - .xls & xlsx");
+		}
+		callback(null, true)
+	},
+});
 
 app.post('/project', upload.single('file'), 
     (req, res ,next ) => {
     	file = req.file
     	if (!file){
-    		const error = new error("lütfen bir dosya yükleyin")
-    		error.httpStatusCode = 400
-    		return next(error);
+    		return next(" Error: File is not selected. Please get back in your browser. ");
     	}else{
     	res.setHeader('Content-Type', 'multipart/form-data');
     	res.setHeader('Connection' , 'keep-alive');
@@ -80,15 +85,15 @@ app.get("/project", function(req, res , next){
         if(err){
             throw err;
         } else {
-            res.render("project",{projects:projects});
+            res.render("project",{projects:projects, currentUser:req.user});
         }
     })
 });	
 liveReloadServer.server.once("connection", () => {
   setTimeout(() => {
     liveReloadServer.refresh("/project");
-  }, 5);
-});
+  }, 100);
+}); 
 
 //PASSPORT CONFIG
 app.use(require("express-session")({
@@ -106,20 +111,25 @@ passport.deserializeUser(User.deserializeUser());
 //ROUTES
 //===========
 app.get("/", function(req, res){
-	res.render("home");
+	res.render("home",{currentUser:req.user});
 });
 
-app.get("/dashboard", function(req, res){
-	res.render("dashboard");
+app.get("/dashboard",isLoggedIn, function(req, res){
+	res.render("dashboard",{currentUser:req.user});
 });
-
+//app.get("/project",isLoggedIn, function(req, res){
+//	res.render("project", {currentUser:req.user});
+//});
+function isLoggedIn(req, res, next){
+	if(req.isAuthenticated()){
+		return next();
+	}
+	res.redirect("/login");
+};
 //===============
 //AUTH ROUTES
 //===============
-//show the register form
-app.get("/", function(req, res){
-	res.render("home");
-});
+
 //handle signup logic
 app.post("/", function(req, res){
 	var newUser = new User({email: req.body.email, username: req.body.username});
@@ -136,14 +146,14 @@ app.post("/", function(req, res){
 
 //show login form
 app.get("/login", function(req, res){
-	res.render("login");
+	res.render("login",{currentUser:req.user});
 });
 
 //handle login logic
 app.post("/login", passport.authenticate("local", 
 	{
 		successRedirect: "/dashboard",
-		failureRedirect: "/login"
+		failureRedirect: "/login" ,
 	}), function(req, res){
 	res.send("login logic happenns here");
 });
@@ -169,6 +179,9 @@ function callConverter() {
 		}
    })
 };
+
+
+
 
 
 app.listen(port, () => console.log(`Listening on ${port}`));

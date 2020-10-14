@@ -11,7 +11,7 @@
 		<div class="d-flex" id="wrapper">
 		<!-- Sidebar -->
     	<div class="bg-dark text-white border-right" id="sidebar-wrapper">
-      	<div class="sidebar-heading">NOVA DSA </div>
+      	<div class="sidebar-heading"><a href="/" style="color:white;text-decoration:none;">NOVA DSA <a> </div>
       	<div class="list-group list-group-flush">
         	<a href="/dashboard" class="list-group-item list-group-item-action bg-dark text-white">Dashboard</a>
         	<a href="/project" class="list-group-item list-group-item-action bg-dark text-white">Projects</a>
@@ -30,9 +30,10 @@
         	</button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
           	<ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-            	<li class="nav-item active">
-            		<a class="nav-link" href="/logout">Logout</a>
-            	</li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout">Logout</a>
+                </li>
+                
           	</ul>
           </div>
       	</nav>
@@ -43,8 +44,6 @@
                 <div class="form-group">
                   <label for="exampleFormControlFile1">Choose project file</label>
                   <input type="file" name="file" id="exampleFormControlFile1" />
-                </div>
-                <div class="form-group">
                   <input class="btn btn-primary" type='submit' value='Upload!' " />
                 </div>
               </form> 
